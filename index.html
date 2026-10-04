@@ -176,7 +176,7 @@ const videoMap = {
 "Economics|Introduction to Microeconomics":"KLCZ2TtbZ9g",
 "English|The Portrait of a Lady":"JXJgRTP3Wxw",
 "Physical Education|Changing Trends and Career in Physical Education":"bZ3yfsRWdYg",
-"Computer Science with Python|Introduction to Python":"https://www.youtube.com/results?search_query=Class+11+Computer+Science+Python+Introduction"
+
 };
 function getVideo(s,c){
   return videoMap[s+"|"+c] || "";
@@ -203,10 +203,11 @@ function chapter(s,c){
  const area=document.getElementById("videoArea");
  if(v){
    const siteOrigin = window.location.protocol === "http:" || window.location.protocol === "https:" ? window.location.origin : "";
-const embedUrl = "https://www.youtube.com/embed/" + v + "?rel=0" + (siteOrigin ? "&origin=" + encodeURIComponent(siteOrigin) : "");
-area.innerHTML='<div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:12px;background:#000"><iframe src="'+embedUrl+'" title="Class video" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe></div><p class="small" style="margin-top:8px">Video plays inside the website. Some videos may not allow embedding.</p>';
+   const embedUrl = "https://www.youtube.com/embed/" + v + "?rel=0" + (siteOrigin ? "&origin=" + encodeURIComponent(siteOrigin) : "");
+   area.innerHTML='<div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:12px;background:#000"><iframe src="'+embedUrl+'" title="Class video" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe></div><p class="small" style="margin-top:8px">Video plays inside the website. Some videos may not allow embedding.</p>';
  }else{
-   area.innerHTML='<div style="background:#f0f1f5;border-radius:12px;padding:16px"><b>🎥 Video slot ready</b><p class="small">This chapter does not have an embedded video added yet.</p></div>';
+   const q=encodeURIComponent('Class 11 CBSE '+s+' '+c+' one shot');
+   area.innerHTML='<div style="background:#f0f1f5;border-radius:12px;padding:16px"><b>🎥 Class Video</b><p class="small">Is chapter ke liye YouTube par Class 11 CBSE video search karo:</p><a class="btn" href="https://www.youtube.com/results?search_query='+q+'" target="_blank" rel="noopener">▶ Watch Class Video</a></div>';
  }
  sheetbg.classList.add("show")
 }
