@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5b5ce2">
+<title>Commerce 11 Hub</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f6fa;color:#171923;font-family:Arial,Helvetica,sans-serif}
+body.dark{background:#101217;color:#f4f5f7}
+#app{max-width:700px;margin:auto;min-height:100vh;padding-bottom:80px}
+header{padding:18px;background:inherit;position:sticky;top:0;z-index:5}
+.brand{font-size:24px;font-weight:800}.small{color:#737987;font-size:13px;margin-top:4px}
+.search{margin-top:14px;background:white;border:1px solid #e2e4ea;border-radius:14px;padding:12px}
+.dark .search,.dark .card,.dark .sheet,.dark .nav{background:#1b1e25;border-color:#30343d}
+.search input,input,textarea{border:0;outline:0;background:transparent;color:inherit;width:100%;font-size:14px}
+main{padding:0 16px}.page{display:none}.page.show{display:block}
+.hero{background:#5b5ce2;color:white;border-radius:20px;padding:20px;margin:6px 0 18px}
+.hero h1{margin:0 0 7px;font-size:23px}.hero p{margin:0 0 15px;opacity:.9}
+button{font:inherit;cursor:pointer}.btn{border:0;background:#5b5ce2;color:white;border-radius:11px;padding:10px 13px;font-weight:700}.light{background:white;color:#4c4ec4}.soft{background:#ececff;color:#303248}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.card{background:white;border:1px solid #e2e4ea;border-radius:16px;padding:15px;margin-bottom:10px}.click{cursor:pointer}.icon{font-size:27px}.card h3{margin:7px 0 4px;font-size:16px}.muted{color:#737987;font-size:13px}
+.title{font-size:19px;font-weight:800;margin:18px 0 10px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.progress{height:8px;background:#e2e4ea;border-radius:20px;overflow:hidden}.bar{height:100%;background:#5b5ce2}
+.chapter{background:white;border:1px solid #e2e4ea;border-radius:15px;padding:14px;margin:10px 0}.dark .chapter{background:#1b1e25;border-color:#30343d}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin:9px 0}.tag{background:#ececff;border-radius:7px;padding:4px 7px;font-size:11px}
+.actions{display:flex;gap:7px;flex-wrap:wrap}.actions .btn{font-size:12px}
+.nav{position:fixed;bottom:0;left:0;right:0;max-width:700px;margin:auto;background:white;border-top:1px solid #ddd;padding:8px 4px;display:flex;justify-content:space-around;z-index:10}
+.nav button{border:0;background:none;color:#737987;font-size:10px}.nav b{display:block;font-size:19px;margin-bottom:2px}.nav .on{color:#5b5ce2}
+.option{display:block;width:100%;text-align:left;background:transparent;color:inherit;border:1px solid #ddd;border-radius:10px;padding:10px;margin:7px 0}.option.sel{background:#ececff;border-color:#5b5ce2}
+.sheetbg{display:none;position:fixed;inset:0;background:#0008;z-index:20;align-items:flex-end}.sheetbg.show{display:flex}.sheet{background:white;color:#171923;border-radius:20px 20px 0 0;padding:18px;width:100%;max-height:82vh;overflow:auto}.dark .sheet{color:#f4f5f7}
+textarea{border:1px solid #ddd;border-radius:10px;padding:10px;min-height:120px}
+.stat{font-size:24px;font-weight:800}
+.empty{text-align:center;color:#737987;padding:25px}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+ <div class="brand">📚 Commerce 11 Hub</div>
+ <div class="small">CBSE • Class 11 • Study smarter</div>
+ <div class="search">🔎 <input id="searchBox" placeholder="Search chapters..." oninput="searchNow()"></div>
+</header>
+
+<main>
+<div id="home" class="page show">
+ <div class="hero"><h1>Welcome to your Study Hub</h1><p>Notes • Videos • MCQs • Important Questions • Progress</p><button class="btn light" onclick="go('subjects')">Start Learning →</button></div>
+ <div class="title">Subjects</div><div id="homeSubjects" class="grid"></div>
+ <div class="title">Quick Practice</div>
+ <div class="grid">
+  <div class="card click" onclick="go('quiz')">🧠<h3>MCQ Quiz</h3><div class="muted">Practice & score</div></div>
+  <div class="card click" onclick="go('important')">⭐<h3>Important Qs</h3><div class="muted">Exam focused</div></div>
+ </div>
+</div>
+
+<div id="animations" class="page">
+ <div class="row"><div><div class="title">🎬 Animation Learning</div><div class="small">Visual revision for difficult concepts</div></div><button class="btn soft" onclick="go('home')">← Back</button></div>
+ <div class="grid">
+  <div class="card click" onclick="openAnim('Python Basics','https://www.youtube.com/results?search_query=Class+11+Python+programming+animation')"><div class="icon">🐍</div><h3>Python Basics</h3><div class="muted">Variables, data types & logic</div></div>
+  <div class="card click" onclick="openAnim('Economics Concepts','https://www.youtube.com/results?search_query=Class+11+Economics+animation')"><div class="icon">📈</div><h3>Economics</h3><div class="muted">Visual concept revision</div></div>
+  <div class="card click" onclick="openAnim('Accountancy Concepts','https://www.youtube.com/results?search_query=Class+11+Accountancy+animation')"><div class="icon">🧾</div><h3>Accountancy</h3><div class="muted">Animated revision</div></div>
+  <div class="card click" onclick="openAnim('Business Studies Concepts','https://www.youtube.com/results?search_query=Class+11+Business+Studies+animation')"><div class="icon">🏢</div><h3>Business Studies</h3><div class="muted">Visual theory revision</div></div>
+ </div>
+</div>
+<div id="subjects" class="page">
+ <div class="title">📚 All Subjects</div><div id="allSubjects" class="grid"></div>
+</div>
+
+<div id="chapters" class="page">
+ <div class="row"><div><div id="subjectTitle" class="title"></div><div id="subjectCount" class="small"></div></div><button class="btn soft" onclick="go('subjects')">← Back</button></div>
+ <div id="chaptersList"></div>
+</div>
+
+<div id="quiz" class="page">
+ <div class="row"><div class="title">🧠 MCQ Quiz</div><button class="btn soft" onclick="go('home')">Home</button></div>
+ <div id="quizList"></div><button class="btn" onclick="checkQuiz()">Submit Quiz</button><div id="quizResult" class="title"></div>
+</div>
+
+<div id="important" class="page">
+ <div class="title">⭐ Important Exam Questions</div><div id="importantList"></div>
+</div>
+
+<div id="notes" class="page">
+ <div class="title">📝 My Notes</div>
+ <div class="card"><input id="ntitle" placeholder="Topic / chapter title"><br><br><textarea id="ntext" placeholder="Write your exam-ready notes..."></textarea><br><br><button class="btn" onclick="addNote()">Save Note</button></div>
+ <div id="savedNotes"></div>
+</div>
+
+<div id="progress" class="page">
+ <div class="title">📊 My Progress</div>
+ <div class="grid">
+  <div class="card"><div id="doneStat" class="stat">0</div><div class="muted">Chapters completed</div></div>
+  <div class="card"><div id="scoreStat" class="stat">0%</div><div class="muted">Best quiz score</div></div>
+  <div class="card"><div id="noteStat" class="stat">0</div><div class="muted">Saved notes</div></div>
+  <div class="card"><div id="streakStat" class="stat">1</div><div class="muted">Study streak</div></div>
+ </div>
+ <div class="title">Subject Progress</div><div id="subjectProgress"></div>
+</div>
+
+<div id="profile" class="page">
+ <div class="title">👤 My Profile</div>
+ <div class="card"><input id="pname" placeholder="Your name"><br><br><input id="pgoal" placeholder="Study goal e.g. 90%+"><br><br><button class="btn" onclick="saveProfile()">Save</button></div>
+ <div class="card row"><div><b>🌙 Dark Mode</b><div class="small">Switch appearance</div></div><button class="btn soft" onclick="darkMode()">Toggle</button></div>
+</div>
+
+<div id="searchPage" class="page"><div class="title">🔎 Search Results</div><div id="results"></div></div>
+</main>
+
+<nav class="nav">
+ <button onclick="go('home')" data-page="home">🏠<b>Home</b></button>
+ <button onclick="go('subjects')" data-page="subjects">📚<b>Subjects</b></button><button onclick="go('animations')" data-page="animations">🎬<b>Animation</b></button>
+ <button onclick="go('quiz')" data-page="quiz">🧠<b>Quiz</b></button>
+ <button onclick="go('progress')" data-page="progress">📈<b>Progress</b></button>
+ <button onclick="go('profile')" data-page="profile">👤<b>Profile</b></button>
+</nav>
+</div>
+
+<div id="sheetbg" class="sheetbg" onclick="if(event.target.id==='sheetbg')closeSheet()">
+ <div class="sheet"><div class="row"><h2 id="sheetTitle"></h2><button class="btn soft" onclick="closeSheet()">✕</button></div><div id="sheetBody"></div></div>
+</div>
+
+<script>
+const data={
+"Accountancy":["Introduction to Accounting","Theory Base of Accounting","Recording of Transactions – I","Recording of Transactions – II","Bank Reconciliation Statement","Trial Balance and Rectification","Depreciation, Provisions and Reserves","Bills of Exchange","Financial Statements – I","Financial Statements – II"],
+"Business Studies":["Nature and Purpose of Business","Forms of Business Organisation","Private, Public and Global Enterprises","Business Services","Emerging Modes of Business","Social Responsibility of Business","Formation of a Company","Sources of Business Finance","Small Business","Internal Trade","International Business"],
+"Economics":["Introduction","Consumer’s Equilibrium and Demand","Producer Behaviour and Supply","Forms of Market and Price Determination","Statistics for Economics – Introduction","Collection of Data","Organisation of Data","Presentation of Data","Measures of Central Tendency"],
+"English":["The Portrait of a Lady","A Photograph","We’re Not Afraid to Die...","Discovering Tut","The Laburnum Top","The Voice of the Rain","Childhood","The Adventure","Silk Road","Father to Son","Writing Skills","Grammar & Reading"],
+"Physical Education":["Changing Trends & Career in PE","Olympic Value Education","Yoga","Physical Fitness, Wellness & Lifestyle","Doping","Sports & Nutrition","Test, Measurement & Evaluation","Fundamentals of Kinesiology & Biomechanics","Psychology & Sports","Training in Sports"],
+"Computer Science with Python":["Computer Systems and Organisation","Encoding Schemes and Number System","Introduction to Python","Python Programming Fundamentals","Conditional Statements","Loops","Strings","Lists","Tuples and Dictionaries","Introduction to NumPy"]
+};
+const questions=[
+["Accountancy","What is accounting? Explain its objectives and importance.","5 marks"],
+["Accountancy","Explain the basic accounting terms with examples.","3 marks"],
+["Business Studies","Explain the characteristics of business.","5 marks"],
+["Business Studies","Differentiate between sole proprietorship and partnership.","5 marks"],
+["Economics","Explain the law of demand with schedule and diagram.","5 marks"],
+["Economics","What is opportunity cost? Explain with PPC.","3 marks"],
+["Economics","Define statistics and explain its functions.","5 marks"],
+["English","Prepare themes, characters and important writing formats.","5 marks"],
+["Physical Education","Explain the components of physical fitness.","5 marks"],
+["Physical Education","Write short notes on Olympic values and sports ethics.","3 marks"]
+];
+const quiz=[
+["Which accounting equation is correct?",["Assets = Capital + Liabilities","Assets = Capital - Liabilities","Capital = Assets + Liabilities","Liabilities = Assets + Capital"],0],
+["When price rises, quantity demanded generally:",["Rises","Falls","Remains fixed","Becomes zero"],1],
+["A business activity is mainly carried out to:",["Avoid consumers","Earn profit","Stop production","Avoid risk"],1],
+["Mean is a measure of:",["Dispersion only","Central tendency","Correlation only","Index numbers only"],1],
+["Which is a component of physical fitness?",["Strength","Revenue","Demand","Ledger"],0]
+];
+
+let st={done:[],notes:[],best:0,name:"",goal:"",dark:false};
+try{st=Object.assign(st,JSON.parse(localStorage.getItem("c11v5plus")||"{}"))}catch(e){}
+function save(){try{localStorage.setItem("c11v5plus",JSON.stringify(st))}catch(e){}}
+function go(id){
+ document.querySelectorAll(".page").forEach(x=>x.classList.remove("show"));
+ const el=document.getElementById(id); if(el)el.classList.add("show");
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.page===id));
+ if(id==="progress")renderProgress();if(id==="notes")renderNotes();if(id==="quiz")renderQuiz();
+ window.scrollTo(0,0);
+}
+function subjectCard(s){return `<div class="card click" onclick="openSubject('${s}')"><div class="icon">${({Accountancy:"📒","Business Studies":"💼",Economics:"📊",English:"📖","Physical Education":"🏃","Computer Science with Python":"💻"})[s]}</div><h3>${s}</h3><div class="muted">${data[s].length} chapters</div></div>`}
+function renderSubjects(){homeSubjects.innerHTML=Object.keys(data).map(subjectCard).join("");allSubjects.innerHTML=Object.keys(data).map(subjectCard).join("")}
+function openSubject(s){
+ subjectTitle.textContent=s;subjectCount.textContent=data[s].length+" chapters";
+ chaptersList.innerHTML=data[s].map((c,i)=>{
+  let key=s+"|"+c,done=st.done.includes(key);
+  return `<div class="chapter"><div class="row"><b>${i+1}. ${c}</b><span>${done?"✅":"○"}</span></div><div class="tags"><span class="tag">📺 Video</span><span class="tag">📝 Notes</span><span class="tag">🧠 MCQ</span><span class="tag">⭐ Important</span></div><div class="actions"><button class="btn" onclick="chapter('${s}','${esc(c)}')">Open</button><button class="btn soft" onclick="complete('${s}','${esc(c)}')">${done?"Undo":"✓ Complete"}</button></div></div>`
+ }).join("");go("chapters")
+}
+function esc(s){return s.replaceAll("\\","\\\\").replaceAll("'","\\'")}
+function complete(s,c){
+ let k=s+"|"+c,i=st.done.indexOf(k);if(i>=0)st.done.splice(i,1);else st.done.push(k);save();openSubject(s)
+}
+const videoMap = {
+"Accountancy|Introduction to Accounting":"JnTLU0vTVr0",
+"Business Studies|Nature and Purpose of Business":"MrzdYdOXCeg",
+"Economics|Introduction to Microeconomics":"KLCZ2TtbZ9g",
+"English|The Portrait of a Lady":"JXJgRTP3Wxw",
+"Physical Education|Changing Trends and Career in Physical Education":"bZ3yfsRWdYg",
+"Computer Science with Python|Introduction to Python":"https://www.youtube.com/results?search_query=Class+11+Computer+Science+Python+Introduction"
+};
+function getVideo(s,c){
+  return videoMap[s+"|"+c] || "";
+}
+function chapter(s,c){
+ let done=st.done.includes(s+"|"+c);
+ sheetTitle.textContent=c;
+ sheetBody.innerHTML=`<p class="small">${s}</p>
+ <div class="card"><b>📺 Class Video</b>
+<div id="videoArea" style="margin-top:10px"></div>
+</div>
+ <div class="card"><b>📝 Chapter Notes</b>
+<textarea id="chapterNote" placeholder="Write your notes for this chapter..."></textarea>
+<br><br><button class="btn" onclick="saveChapterNote('${s}','${esc(c)}')">Save Chapter Note</button>
+</div>
+<div class="card"><b>📚 Study Checklist</b>
+<p class="muted">☐ Watch video &nbsp; ☐ Read notes &nbsp; ☐ Practice MCQs &nbsp; ☐ Revise important questions</p>
+</div>
+ <div class="card"><b>⭐ Important Questions</b><p class="muted">Use the Important Questions section for exam practice.</p><button class="btn soft" onclick="closeSheet();go('important')">Practice</button></div>
+ <button class="btn" onclick="complete('${s}','${esc(c)}');closeSheet()">${done?"Mark Uncomplete":"✓ Mark Complete"}</button>`;
+ const savedChapterNote = localStorage.getItem("chapterNote_"+s+"|"+c) || "";
+ const v=getVideo(s,c);
+ const chapterNote = document.getElementById("chapterNote"); if(chapterNote) chapterNote.value = savedChapterNote;
+ const area=document.getElementById("videoArea");
+ if(v){
+   const siteOrigin = window.location.protocol === "http:" || window.location.protocol === "https:" ? window.location.origin : "";
+const embedUrl = "https://www.youtube.com/embed/" + v + "?rel=0" + (siteOrigin ? "&origin=" + encodeURIComponent(siteOrigin) : "");
+area.innerHTML='<div style="position:relative;width:100%;padding-top:56.25%;overflow:hidden;border-radius:12px;background:#000"><iframe src="'+embedUrl+'" title="Class video" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen></iframe></div><p class="small" style="margin-top:8px">Video plays inside the website. Some videos may not allow embedding.</p>';
+ }else{
+   area.innerHTML='<div style="background:#f0f1f5;border-radius:12px;padding:16px"><b>🎥 Video slot ready</b><p class="small">This chapter does not have an embedded video added yet.</p></div>';
+ }
+ sheetbg.classList.add("show")
+}
+function saveChapterNote(s,c){
+ const el=document.getElementById("chapterNote");
+ if(!el)return;
+ localStorage.setItem("chapterNote_"+s+"|"+c,el.value);
+ alert("Chapter note saved ✓");
+}
+function closeSheet(){sheetbg.classList.remove("show")}
+function renderQuiz(){
+ quizList.innerHTML=quiz.map((q,i)=>`<div class="card"><b>Q${i+1}. ${q[0]}</b>${q[1].map((o,j)=>`<button class="option" data-q="${i}" data-a="${j}" onclick="pick(this)">${String.fromCharCode(65+j)}. ${o}</button>`).join("")}</div>`).join("");quizResult.textContent=""
+}
+function pick(x){document.querySelectorAll('[data-q="'+x.dataset.q+'"]').forEach(y=>y.classList.remove("sel"));x.classList.add("sel")}
+function checkQuiz(){
+ let score=0;quiz.forEach((q,i)=>{let x=document.querySelector('[data-q="'+i+'"].sel');if(x&&+x.dataset.a===q[2])score++});
+ let p=Math.round(score/quiz.length*100);st.best=Math.max(st.best,p);save();quizResult.textContent="Score: "+score+"/"+quiz.length+" ("+p+"%) • Best: "+st.best+"%";renderProgress()
+}
+function renderImportant(){importantList.innerHTML=questions.map((q,i)=>`<div class="card"><div class="small">${q[0]} • ${q[2]}</div><h3>${q[1]}</h3><button class="btn soft" onclick="answerPlan('${esc(q[1])}')">Answer Plan</button></div>`).join("")}
+function answerPlan(q){sheetTitle.textContent="Answer Plan";sheetBody.innerHTML=`<p><b>Question:</b> ${q}</p><ol><li>Write a clear definition/introduction.</li><li>Use headings and key points.</li><li>Add example, diagram or formula if required.</li><li>Finish with a short conclusion.</li></ol><p class="small">Make the final answer according to your teacher's notes and CBSE syllabus.</p>`;sheetbg.classList.add("show")}
+function addNote(){let t=ntitle.value.trim(),n=ntext.value.trim();if(!t||!n){alert("Please enter title and note.");return}st.notes.unshift({t,n});ntitle.value="";ntext.value="";save();renderNotes()}
+function renderNotes(){savedNotes.innerHTML=st.notes.length?st.notes.map((n,i)=>`<div class="card"><b>${clean(n.t)}</b><p class="muted">${clean(n.n)}</p><button class="btn soft" onclick="delNote(${i})">Delete</button></div>`).join(""):'<div class="empty">No notes saved yet.</div>'}
+function delNote(i){st.notes.splice(i,1);save();renderNotes()}
+function clean(x){return String(x).replaceAll("<","&lt;").replaceAll(">","&gt;")}
+function renderProgress(){
+ doneStat.textContent=st.done.length;scoreStat.textContent=st.best+"%";noteStat.textContent=st.notes.length;streakStat.textContent=st.done.length?Math.min(7,1+Math.floor(st.done.length/2)):1;
+ subjectProgress.innerHTML=Object.keys(data).map(s=>{let d=data[s].filter(c=>st.done.includes(s+"|"+c)).length,p=Math.round(d/data[s].length*100);return `<div class="card"><div class="row"><b>${s}</b><span>${p}%</span></div><div class="progress"><div class="bar" style="width:${p}%"></div></div></div>`}).join("")
+}
+function saveProfile(){st.name=pname.value.trim();st.goal=pgoal.value.trim();save();alert("Profile saved!")}
+function darkMode(){st.dark=!st.dark;document.body.classList.toggle("dark",st.dark);save()}
+function searchNow(){
+ let q=searchBox.value.trim().toLowerCase();if(!q){go("home");return}
+ let out=[];
+ Object.keys(data).forEach(s=>data[s].forEach(c=>{if((s+" "+c).toLowerCase().includes(q))out.push(`<div class="card click" onclick="chapter('${s}','${esc(c)}')"><b>${clean(c)}</b><div class="small">${s}</div></div>`)}));
+ questions.forEach(x=>{if(x.join(" ").toLowerCase().includes(q))out.push(`<div class="card"><b>${x[0]}</b><p>${clean(x[1])}</p></div>`)});
+ results.innerHTML=out.length?out.join(""):'<div class="empty">No results found.</div>';go("searchPage")
+}
+renderSubjects();renderImportant();renderProgress();renderNotes();
+pname.value=st.name||"";pgoal.value=st.goal||"";document.body.classList.toggle("dark",!!st.dark);
+</script>
+<div class="sheetbg" id="animSheet" onclick="if(event.target===this)closeAnim()"><div class="sheet">
+ <div class="sheethead"><b id="animTitle">Animation</b><button class="x" onclick="closeAnim()">✕</button></div>
+ <div class="sheetbody"><p>Free public animation-video results:</p><a id="animLink" class="btn" target="_blank" rel="noopener">▶ Open videos</a></div>
+</div></div>
+<script>
+function openAnim(title,url){document.getElementById('animTitle').textContent=title;document.getElementById('animLink').href=url;document.getElementById('animSheet').classList.add('show')}
+function closeAnim(){document.getElementById('animSheet').classList.remove('show')}
+</script>
+</body>
+</html>
